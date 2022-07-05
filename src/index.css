@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply h-full rounded-md bg-slate-900 px-3 font-Sarabun text-sm text-slate-100 shadow-md transition duration-300  hover:-top-0.5 hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg active:top-0.5 active:shadow-sm;
+    @apply h-full rounded-md border-[1px] border-slate-900 bg-slate-900 px-3 font-Kanit text-sm text-slate-100 shadow-md transition  duration-300 hover:-top-0.5 hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg active:top-0.5 active:shadow-sm;
   }
 
   .btn--primary {
@@ -12,7 +12,7 @@
   }
 
   .btn--outline {
-    @apply rounded-md bg-slate-900 px-3 py-2 font-Sarabun text-sm text-slate-100 shadow-md transition duration-300  hover:-top-0.5 hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg active:top-0.5 active:shadow-sm;
+    @apply rounded-md border-[1px] border-slate-900 bg-slate-100 px-3 py-2 font-Kanit text-sm text-slate-900 shadow-md transition duration-300  hover:-top-0.5 hover:bg-slate-600 hover:text-slate-100 hover:shadow-lg active:top-0.5 active:shadow-sm;
   }
 
   .border-test {
