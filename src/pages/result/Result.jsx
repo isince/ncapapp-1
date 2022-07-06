@@ -47,6 +47,7 @@ function Result() {
   let [selectedNcap, setSelectedNcap] = useState(ncap[0]);
   let [query, setQuery] = useState("");
   let [isOpen, setIsOpen] = useState(false);
+  let [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const filteredNcap =
     query === ""
@@ -61,6 +62,14 @@ function Result() {
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function closeModalAlert() {
+    setIsOpenAlert(false);
+  }
+
+  function openModalAlert() {
+    setIsOpenAlert(true);
   }
 
   function modal() {
@@ -210,20 +219,28 @@ function Result() {
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-3"
                 >
-                  <Popover.Panel className="absolute left-0 z-50 mt-3 w-full   transform">
-                    <div className="overflow-hidden rounded-lg bg-slate-100 p-4 font-Sarabun text-sm shadow-lg ring-1 ring-black ring-opacity-5">
-                      <div className="mb-3 flex flex-row">
-                        <div className="w-20 ">
+                  <Popover.Panel className="absolute left-0 z-50 mt-3 w-full   transform rounded-md bg-slate-100 font-Sarabun text-sm shadow-lg">
+                    <div className="flex flex-col justify-center space-y-3 overflow-hidden p-4 ring-1 ring-black ring-opacity-5 [&>*]:h-[28px]">
+                      <div className="flex flex-row ">
+                        <div className="w-28 ">
                           <p className="font-bold">Ncap</p>
                         </div>
                         <div className="flex flex-row">
-                          <input />
-                          <input />
+                          <input className="rounded-md border-[1px] border-slate-400 px-3" />
                         </div>
                       </div>
 
-                      <div className="mb-3 flex flex-row">
-                        <div className="w-20 flex-initial">
+                      <div className="flex flex-row ">
+                        <div className="w-28 ">
+                          <p className="font-bold">NcapGroup</p>
+                        </div>
+                        <div className="flex flex-row">
+                          <input className="rounded-md border-[1px] border-slate-400 px-3" />
+                        </div>
+                      </div>
+
+                      <div className="flex flex-row">
+                        <div className="w-28 flex-initial">
                           <p className="font-bold">Status</p>
                         </div>
                         <ul className="grid flex-auto grid-flow-row grid-cols-3 ">
@@ -279,15 +296,24 @@ function Result() {
                       </div>
 
                       <div className="flex flex-row">
-                        <p className="w-20 font-bold">Date</p>
+                        <p className="w-28 font-bold">Date</p>
                         <div className="flex flex-row">
-                          <input />
-                          <input />
+                          <input className="rounded-md border-[1px] border-slate-400" />
+                          <span className="mx-2"> ถึง </span>
+                          <input className="rounded-md border-[1px] border-slate-400" />
                         </div>
                       </div>
 
-                      <div className=" my-3 border-b-[1px] border-slate-200"></div>
-
+                      <div className="flex flex-row ">
+                        <div className="w-28 ">
+                          <p className="font-bold">ประเภทเป้าหมาย</p>
+                        </div>
+                        <div className="flex flex-row">
+                          <input className="rounded-md border-[1px] border-slate-400 px-3" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="border-t-2 py-3 px-4">
                       <div className="flex flex-row justify-between">
                         <button className="text-red-600">Clear</button>
                         <div className="space-x-4">
@@ -324,11 +350,9 @@ function Result() {
               </div>
             </div>
 
-            <div className="flex flex-row  items-center rounded-full bg-green-600 px-4 py-1 text-slate-100">
-              <AiOutlineCheck className="mr-1 h-5 w-5" />
-              <h4 className="result__status whitespace-nowrap text-sm ">
-                ตรวจสอบแล้ว
-              </h4>
+            <div className="flex flex-row items-center rounded-full bg-orange-600 px-4 py-1 text-slate-100">
+              <BiTime className="mr-1 h-5 w-5" />
+              <h4 className="result__status ">รอตรวจสอบ</h4>
             </div>
 
             <div className="flex flex-none flex-row justify-end space-x-1">
@@ -366,6 +390,7 @@ function Result() {
                     >
                       <Popover.Panel className="fixed right-0 top-0 z-50 h-screen w-[600px] transform overflow-y-auto bg-slate-200 p-4 shadow-sm">
                         <div className="flex flex-col space-y-3">
+                          {/*ข้อมูลการตรวจจับ */}
                           <div className="rounded-md bg-slate-100 ">
                             <div className="flex flex-row items-center justify-between px-4 pt-4 pb-3">
                               <h1 className="font-Kanit text-base">
@@ -378,7 +403,7 @@ function Result() {
                                 </button>
                               </div>
                             </div>
-                            <hr />
+                            <hr className=" border-slate-300" />
                             <div className="my-4 mx-8 flex flex-col space-y-3 [&>*]:h-[36px]">
                               <div className="flex flex-row items-center font-Sarabun text-base">
                                 <h4 className="w-2/5">เวลา</h4>
@@ -466,12 +491,37 @@ function Result() {
                             </div>
                           </div>
 
+                          {/*ข้อมูลการตรวจจับใบหน้า */}
+                          <div className="rounded-md bg-slate-100 ">
+                            <div className="flex flex-row items-center justify-between px-4 pt-4 pb-3">
+                              <h1 className="font-Kanit text-base">
+                                รายละเอียดข้อมูลตรวจจับใบหน้า
+                              </h1>
+                              <div className="h-10 space-x-2">
+                                <button className="btn">แก้ไข</button>
+                                <button className="btn btn--outline">
+                                  ยกเลิก
+                                </button>
+                              </div>
+                            </div>
+                            <hr className=" border-slate-300" />
+                            <div className="my-4 mx-8 flex flex-col space-y-3 [&>*]:h-[36px]">
+                              <div className="flex flex-row items-center font-Sarabun text-base">
+                                <h4 className="w-2/5">เวลา</h4>
+                                <p className="w-full rounded-md border-2 py-1 px-3">
+                                  ไม่พบเป้าหมาย
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/*ข้อมูลกล้อง Nacp */}
                           <div className="rounded-md bg-slate-100">
                             <h1 className=" px-4 pt-4 pb-3 font-Kanit text-base">
                               ข้อมูลกล้อง NCAP
                             </h1>
-                            <hr />
-                            <div className="my-4 mx-8 flex flex-col space-y-3">
+                            <hr className=" border-slate-300" />
+                            <div className="my-4 mx-8 flex flex-col space-y-3 [&>*]:h-[36px] ">
                               <div className="flex flex-row items-center font-Sarabun text-base">
                                 <h4 className="w-2/5">Ncap</h4>
                                 <p className="w-full rounded-md border-2 py-1 px-3">
@@ -491,9 +541,15 @@ function Result() {
                                 </p>
                               </div>
                               <div className="flex flex-row items-center font-Sarabun text-base">
-                                <h4 className="w-2/5">สถานะกล้อง</h4>
+                                <h4 className="w-2/5">สถานะแบตเตอรี่</h4>
                                 <p className="w-full rounded-md border-2 py-1 px-3">
-                                  ตรวจจับเมื่อ 1 ชม. ที่แล้ว
+                                  42% (12-07-2565 12:00:01)
+                                </p>
+                              </div>
+                              <div className="flex flex-row items-center font-Sarabun text-base">
+                                <h4 className="w-2/5">อุณภูมิ</h4>
+                                <p className="w-full rounded-md border-2 py-1 px-3">
+                                  34 องศา (12-07-2565 12:00:01)
                                 </p>
                               </div>
                             </div>
@@ -506,6 +562,7 @@ function Result() {
               </Popover>
             </div>
           </li>
+
           <li className="flex flex-row items-center justify-between space-x-3  bg-slate-100 py-4 px-6 font-Sarabun transition duration-200">
             <div className="flex flex-none flex-col">
               <div className="flex flex-row items-center">
@@ -748,6 +805,63 @@ function Result() {
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
+                    >
+                      OK
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
+      {/*Modal Alert */}
+      <Transition appear show={isOpenAlert} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModalAlert}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-md" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className=" w-full w-[62rem] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Ncap
+                  </Dialog.Title>
+                  <div className="mx-auto mt-2">
+                    <img
+                      src="20220404_115331-100MEDIA-IMG_0118.JPG"
+                      alt=""
+                      className=" object-cover"
+                    />
+                  </div>
+
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModalAlert}
                     >
                       OK
                     </button>
