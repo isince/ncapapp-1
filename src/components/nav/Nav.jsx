@@ -2,30 +2,36 @@ import { React, useState } from "react";
 import { Transition } from "@headlessui/react";
 
 import { IconContext } from "react-icons";
+
+import { BsFileEarmarkSpreadsheet } from "react-icons/bs";
 import {
   AiFillSetting,
   AiOutlineCamera,
   AiOutlineLogout,
   AiOutlineUser,
-  AiFillNotification,
 } from "react-icons/ai";
-import { FaMapMarkerAlt } from "react-icons/fa";
 import { MdSpaceDashboard, MdMonitor, MdExpandMore } from "react-icons/md";
-import { HiMenu } from "react-icons/hi";
+import { HiMenu, HiOutlineDocumentReport } from "react-icons/hi";
 //import { CgClose } from "react-icons/cg";
 
 function Nav() {
   const listItemUpper = [
     { key: 11, icon: MdSpaceDashboard, name: "แดชบอร์ด", path: "/" },
-    { key: 12, icon: FaMapMarkerAlt, name: "แผนที่", path: "/" },
     { key: 13, icon: MdMonitor, name: "มอนิเตอร์", path: "/" },
     { key: 14, icon: AiOutlineUser, name: "ผู้ใช้งาน", path: "/" },
     { key: 15, icon: AiFillSetting, name: "ตั้งค่าระบบ", path: "/" },
-    { key: 16, icon: AiOutlineCamera, name: "กล้อง", path: "/" },
+    { key: 16, icon: AiOutlineCamera, name: "กล้อง Ncap", path: "/" },
+    {
+      key: 17,
+      icon: BsFileEarmarkSpreadsheet,
+      name: "บันทึกเหตุการณ์",
+      path: "/",
+    },
+    { key: 18, icon: HiOutlineDocumentReport, name: "รายงาน", path: "/" },
   ];
 
   const listItemLower = [
-    { key: 21, icon: AiFillNotification, name: "Dashboard", path: "/" },
+    { key: 21, icon: AiOutlineUser, name: "User1", path: "/" },
     { key: 22, icon: AiOutlineLogout, name: "ออกจากระบบ", path: "/" },
   ];
 
@@ -82,7 +88,7 @@ function Nav() {
       <nav
         className={`${
           isExpanded ? "w-[14rem]" : "w-[4.5rem]"
-        } h-screen flex-none overflow-hidden bg-slate-900 shadow-sm transition-all duration-300`}
+        } flex h-screen flex-none flex-col justify-end overflow-hidden bg-slate-900 shadow-sm transition-all duration-300`}
       >
         {/* Header */}
         <header className="mx-4 mb-8 flex h-[5rem] items-center justify-around gap-4">
@@ -109,6 +115,11 @@ function Nav() {
 
         {/* Top Nav list */}
         <ul>{navItemRender("upper")}</ul>
+
+        {/* Bottom Nav list */}
+        <ul className="mb-4 flex flex-auto flex-col justify-end">
+          {navItemRender("lower")}
+        </ul>
       </nav>
     </IconContext.Provider>
   );
