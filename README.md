@@ -71,10 +71,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Install Pcaket
 
-npx create-react-app ncap-app
-npm install react-icons --save
-npm install @headlessui/react
+npx create-react-app ncap-app\
+npm install react-icons --save\
+npm install @headlessui/react\
 
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-npm install -D prettier prettier-plugin-tailwindcss
+npm install -D tailwindcss postcss autoprefixer\
+npx tailwindcss init -p\
+npm install -D prettier prettier-plugin-tailwindcss\
